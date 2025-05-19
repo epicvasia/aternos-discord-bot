@@ -32,7 +32,7 @@ func CreateServerStatusNotificationEmbed(info *aternos.ServerInfo) (*discordgo.M
 				},
 			},
 			Footer: &discordgo.MessageEmbedFooter{
-				Text: "Minecraft Server",
+				Text: "Minecraft Server Bot",
 			},
 		}, nil
 
@@ -42,7 +42,7 @@ func CreateServerStatusNotificationEmbed(info *aternos.ServerInfo) (*discordgo.M
 			Description: fmt.Sprintf("**%s** is currently shut down.", info.Name),
 			Color:       colorMap[aternos.Offline],
 			Footer: &discordgo.MessageEmbedFooter{
-				Text: "Minecraft Server",
+				Text: "Minecraft Server Bot",
 			},
 		}, nil
 
