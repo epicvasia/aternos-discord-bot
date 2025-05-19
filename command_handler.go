@@ -2,15 +2,16 @@ package aternos_discord_bot
 
 import (
 	"context"
+	"strings"
+
 	"github.com/bwmarrin/discordgo"
 	aternos "github.com/sleeyax/aternos-api"
 	"github.com/sleeyax/aternos-discord-bot/database"
 	"github.com/sleeyax/aternos-discord-bot/database/models"
 	"github.com/sleeyax/aternos-discord-bot/message"
-	"strings"
 )
 
-// handleCommands responds to incoming interactive commands on discord.
+// handleCommands responds to incoming interactive commands on Discord.
 func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	command := i.ApplicationCommandData()
 
@@ -27,9 +28,13 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 
 	switch command.Name {
 	case HelpCommand:
-		sendHiddenText(message.FormatDefault(faq))
+		respondWithEmbeds(s, i, []*discordgo.MessageEmbed{
+			message.CreateHelpEmbed(),
+		})
+
 	case PingCommand:
 		sendHiddenText(message.FormatDefault("Pong!"))
+
 	case ConfigureCommand:
 		options := optionsToMap(command.Options)
 
@@ -42,15 +47,9 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 			sendErrorText("❌ Failed to save configuration.", err)
 			break
 		}
-
 		sendText(message.FormatSuccess("✅ Configuration changed successfully."))
-	case StatusCommand:
-		fallthrough
-	case InfoCommand:
-		fallthrough
-	case PlayersCommand:
-		fallthrough
-	case StartCommand:
+
+	case StatusCommand, InfoCommand, PlayersCommand, StartCommand:
 		w, err := ab.getWorker(i.GuildID)
 		if err != nil {
 			if err == database.ErrDataNotFound {
@@ -70,7 +69,6 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 			} else {
 				sendErrorText("⚠️ Failed to get server info", err)
 			}
-
 			break
 		}
 
@@ -79,16 +77,18 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 			respondWithEmbeds(s, i, []*discordgo.MessageEmbed{
 				message.CreateServerInfoEmbed(serverInfo),
 			})
+
 		case StatusCommand:
 			sendText(message.FormatInfo("Server '%s' is currently **%s**.", serverInfo.Name, serverInfo.StatusLabel))
+
 		case PlayersCommand:
 			if len(serverInfo.PlayerList) == 0 {
 				sendText(message.FormatInfo("No players online right now."))
 				break
 			}
 			sendText(message.FormatInfo("Active players: %s.", strings.Join(serverInfo.PlayerList, ", ")))
+
 		case StartCommand:
-			// connect to WSS
 			if err = w.Init(); err != nil {
 				sendErrorText("Failed to initialize worker! See `/help` or try again later.", err)
 				break
@@ -115,13 +115,10 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 						}
 					}
 				case "status":
-					switch info.Status {
-					case aternos.Offline:
-						fallthrough
-					case aternos.Online:
+					if info.Status == aternos.Offline || info.Status == aternos.Online {
 						notification, _ := message.CreateServerStatusNotificationEmbed(info)
 						s.ChannelMessageSendEmbed(i.ChannelID, notification)
-					case aternos.Preparing:
+					} else if info.Status == aternos.Preparing {
 						s.ChannelMessageSend(i.ChannelID, message.FormatInfo("Waiting in queue (%d/%d, %s)...", info.Queue.Position, info.Queue.Count, info.Queue.Time))
 						w.Log("Waiting in queue...")
 					}
@@ -131,6 +128,6 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 			})
 		}
 	default:
-		sendText(message.FormatWarning("Command unavailable. Please try again later or refresh your discord client `CTRL + R`"))
+		sendText(message.FormatWarning("Command unavailable. Please try again later or refresh your Discord client with `CTRL + R`."))
 	}
 }
