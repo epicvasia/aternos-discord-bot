@@ -10,7 +10,7 @@ func CreateServerStatusNotificationEmbed(info *aternos.ServerInfo) (*discordgo.M
 	switch info.Status {
 	case aternos.Online:
 		return &discordgo.MessageEmbed{
-			Title:       "Server is online",
+			Title:       "<:online:1373961339432730694> Server is online",
 			Description: fmt.Sprintf("Join now! Only %d seconds left.", info.Countdown),
 			Color:       colorMap[aternos.Online],
 			Fields: []*discordgo.MessageEmbedField{
@@ -28,7 +28,7 @@ func CreateServerStatusNotificationEmbed(info *aternos.ServerInfo) (*discordgo.M
 		}, nil
 	case aternos.Offline:
 		return &discordgo.MessageEmbed{
-			Title:       "Server is offline",
+			Title:       "<:offline:1373961374148988969> Server is offline",
 			Description: "The server is currently offline.",
 			Color:       colorMap[aternos.Offline],
 		}, nil
