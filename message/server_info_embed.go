@@ -15,7 +15,7 @@ func CreateServerInfoEmbed(info *aternos.ServerInfo) *discordgo.MessageEmbed {
 	}
 
 	return &discordgo.MessageEmbed{
-		Title:       "Aternos Server Info",
+		Title:       "Minecraft Server Info",
 		Description: fmt.Sprintf("**%s** is currently **%s**.", info.Name, info.StatusLabel),
 		Color:       colorMap[info.Status],
 		URL:         "https://aternos.org/server/",
@@ -48,7 +48,7 @@ func CreateServerInfoEmbed(info *aternos.ServerInfo) *discordgo.MessageEmbed {
 		},
 		Timestamp: time.Now().Format(time.RFC3339),
 		Footer: &discordgo.MessageEmbedFooter{
-			Text: "Aternos Discord Bot",
+			Text: "Minecraft Server Bot",
 		},
 	}
 }
