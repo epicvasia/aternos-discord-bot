@@ -1,13 +1,15 @@
 package aternos_discord_bot
 
-import ( "context" "fmt" "strings"
+import (
+    "context"
+    "fmt"
+    "strings"
 
-"github.com/bwmarrin/discordgo"
-aternos "github.com/sleeyax/aternos-api"
-"github.com/sleeyax/aternos-discord-bot/database"
-"github.com/sleeyax/aternos-discord-bot/database/models"
-"github.com/sleeyax/aternos-discord-bot/message"
-
+    "github.com/bwmarrin/discordgo"
+    aternos "github.com/sleeyax/aternos-api"
+    "github.com/sleeyax/aternos-discord-bot/database"
+    "github.com/sleeyax/aternos-discord-bot/database/models"
+    "github.com/sleeyax/aternos-discord-bot/message"
 )
 
 // handleCommands responds to incoming interactive commands on Discord. func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCreate) { command := i.ApplicationCommandData()
