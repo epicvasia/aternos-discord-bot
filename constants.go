@@ -11,4 +11,4 @@ This is expected behaviour. You must reconfigure the bot with /configure wheneve
 
 __Report an issue__
 
-Need more help? See https://github.com/sleeyax/aternos-discord-bot for general instructions and open an issue or discussion if you're stuck on something.`
+Need more help? See https://github.com/epicvasia/aternos-discord-bot for general instructions and open an issue or discussion if you're stuck on something.`
