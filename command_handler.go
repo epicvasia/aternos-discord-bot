@@ -39,11 +39,11 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 			ServerCookie:  options[ServerOption].StringValue(),
 		})
 		if err != nil {
-			sendErrorText("Failed to save configuration.", err)
+			sendErrorText("❌ Failed to save configuration.", err)
 			break
 		}
 
-		sendText(message.FormatSuccess("Configuration changed successfully."))
+		sendText(message.FormatSuccess("✅ Configuration changed successfully."))
 	case StatusCommand:
 		fallthrough
 	case InfoCommand:
@@ -54,9 +54,9 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 		w, err := ab.getWorker(i.GuildID)
 		if err != nil {
 			if err == database.ErrDataNotFound {
-				sendText(message.FormatWarning("Bot setup incomplete. Use `/configure` to configure the bot."))
+				sendText(message.FormatWarning("⚠️ Bot setup incomplete. Use `/configure` to configure the bot."))
 			} else {
-				sendErrorText("Failed to get worker", err)
+				sendErrorText("❌ Failed to get worker", err)
 			}
 			break
 		}
@@ -64,11 +64,11 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 		serverInfo, err := w.GetServerInfo()
 		if err != nil {
 			if err == aternos.UnauthenticatedError {
-				sendText(message.FormatError("Invalid credentials. Use `/configure` to reconfigure the bot."))
+				sendText(message.FormatError("❌ Invalid credentials. Use `/configure` to reconfigure the bot."))
 			} else if err == aternos.ForbiddenError {
-				sendText(message.FormatError("Access forbidden. Please try again later."))
+				sendText(message.FormatError("❌ Access forbidden. Please try again later."))
 			} else {
-				sendErrorText("Failed to get server info", err)
+				sendErrorText("⚠️ Failed to get server info", err)
 			}
 
 			break
