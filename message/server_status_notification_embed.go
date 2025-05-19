@@ -16,7 +16,7 @@ func CreateServerStatusNotificationEmbed(info *aternos.ServerInfo) (*discordgo.M
 			Fields: []*discordgo.MessageEmbedField{
 				&discordgo.MessageEmbedField{
 					Name:   "Server address",
-					Value:  fmt.Sprintf("`%s:%d`", info.Address, info.Port),
+					Value: fmt.Sprintf("`%s`", info.Address),
 					Inline: true,
 				},
 				&discordgo.MessageEmbedField{
