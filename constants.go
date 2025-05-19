@@ -1,7 +1,9 @@
 package aternos_discord_bot
 
 const faq = `
-__Common problems and solutions__
+>>> __Thank You__ **for using this bot!**
+
+- FAQ:
 
 **I just set up a new server but I can't start it!**
 Go to aternos.org, manually start your server *once* and accept the EULA when prompted. From now on you should be able to start your server from the discord bot.
