@@ -1,26 +1,25 @@
-package aternos_discord_bot
+package message
 
-import (
-	"github.com/bwmarrin/discordgo"
-)
+import "github.com/bwmarrin/discordgo"
 
+// CreateHelpEmbed returns a Discord embed for the /help command.
 func CreateHelpEmbed() *discordgo.MessageEmbed {
 	return &discordgo.MessageEmbed{
-		Title:       "Minecraft Server Bot Help",
-		Description: "Thanks for using the Minecraft Server Bot! Here's a quick FAQ to help you out:",
+		Title:       "Need Help?",
+		Description: "Thanks for using the Minecraft Server Bot! Here's some useful info:",
 		Color:       0x5865F2, // Discord blurple
 		Fields: []*discordgo.MessageEmbedField{
 			{
 				Name: "Why can't I start my new server?",
-				Value: "Go to [aternos.org](https://aternos.org), start your server manually once, and accept the EULA. After that, you can start it using the bot!",
+				Value: "Go to [aternos.org](https://aternos.org), start your server manually **once**, and accept the EULA. After that, you can use this bot to start it.",
 			},
 			{
-				Name: "Why did the bot stop working after I logged out?",
-				Value: "This is expected. Run `/configure` again to re-authenticate. The bot doesn't use username:password login (and likely never will).",
+				Name: "The bot suddenly stopped working?",
+				Value: "You were probably logged out of Aternos. Use `/configure` again with a new session and server cookie.",
 			},
 			{
-				Name: "Need help or found a bug?",
-				Value: "Check out the GitHub repo: [github.com/epicvasia/aternos-discord-bot](https://github.com/epicvasia/aternos-discord-bot). You can open an issue or discussion there!",
+				Name: "Need more help?",
+				Value: "[GitHub repo](https://github.com/epicvasia/aternos-discord-bot) – Open an issue or discussion if you're stuck.",
 			},
 		},
 		Footer: &discordgo.MessageEmbedFooter{
