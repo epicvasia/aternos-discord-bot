@@ -51,8 +51,6 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 	case PlayersCommand:
 		fallthrough
 	case StartCommand:
-		fallthrough
-	case StopCommand:
 		w, err := ab.getWorker(i.GuildID)
 		if err != nil {
 			if err == database.ErrDataNotFound {
@@ -89,8 +87,6 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 				break
 			}
 			sendText(message.FormatInfo("Active players: %s.", strings.Join(serverInfo.PlayerList, ", ")))
-		case StopCommand:
-			fallthrough
 		case StartCommand:
 			// connect to WSS
 			if err = w.Init(); err != nil {
@@ -98,25 +94,6 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 				break
 			}
 
-			// stop server
-			if command.Name == StopCommand {
-				if serverInfo.Status == aternos.Stopping || serverInfo.Status == aternos.Offline {
-					sendText(message.FormatInfo("Server already stopped! Type `/status` or `/info` to view the status."))
-					break
-				}
-
-				sendText(message.FormatInfo("Stopping the server, please wait..."))
-
-				// TODO: check if we need to put stop() in a goroutine for better performance
-				if err = w.Stop(); err != nil {
-					s.ChannelMessageSend(i.ChannelID, message.FormatError("Failed to stop the server"))
-					w.Log(err.Error())
-				}
-
-				break
-			}
-
-			// start server
 			if serverInfo.Status != aternos.Offline && serverInfo.Status != aternos.Stopping {
 				sendText(message.FormatInfo("Server already started! Type `/status` or `/info` to view the status."))
 				break
@@ -133,7 +110,7 @@ func (ab *Bot) handleCommands(s *discordgo.Session, i *discordgo.InteractionCrea
 						if err = w.Start(); err != nil {
 							s.ChannelMessageSend(i.ChannelID, message.FormatError("Failed to start! Reconfigure the bot with `/configure` and try again. See `/help` if the problem persists."))
 							w.Log(err.Error())
-							cancel() // cancel the worker's goroutine
+							cancel()
 							break
 						}
 					}
