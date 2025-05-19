@@ -17,7 +17,7 @@ A Discord bot that can start your Aternos Minecraft server with a simple command
 
 Built on top of [aternos-api](https://github.com/sleeyax/aternos-api) and forked from the original [sleeyax/aternos-discord-bot](https://github.com/sleeyax/aternos-discord-bot) project.
 
-**Note:** This fork only supports **starting** the server, not stopping it.
+**Note:** This fork only supports **starting** the server, not stopping it. This version also allows member's to start the server themselves.
 
 ## Commands
 
