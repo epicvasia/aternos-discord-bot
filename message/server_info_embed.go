@@ -34,7 +34,7 @@ func CreateServerInfoEmbed(info *aternos.ServerInfo) *discordgo.MessageEmbed {
 			},
 			&discordgo.MessageEmbedField{
 				Name:   "Server address",
-				Value:  fmt.Sprintf("`%s:%d`", info.Address, info.Port),
+				Value: fmt.Sprintf("`%s`", info.Address),
 				Inline: true,
 			},
 			&discordgo.MessageEmbedField{
