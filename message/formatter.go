@@ -33,7 +33,7 @@ func Format(text string, messageTypes ...Type) string {
 	case warning:
 		b.WriteString(":warning: ")
 	case info:
-		b.WriteString(":information_source: ")
+		b.WriteString("<:info:1373961203247874088> ")
 	case danger:
 		b.WriteString(":x: ")
 	case loading:
