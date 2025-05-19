@@ -7,7 +7,6 @@ const (
 	PingCommand      = "ping"
 	ConfigureCommand = "configure"
 	StartCommand     = "start"
-	StopCommand      = "stop"
 	StatusCommand    = "status"
 	InfoCommand      = "info"
 	PlayersCommand   = "players"
@@ -48,12 +47,6 @@ var commands = []*discordgo.ApplicationCommand{
 	{
 		Name:                     StartCommand,
 		Description:              "Start the minecraft server",
-		DefaultMemberPermissions: &adminPermissions,
-		DMPermission:             &dmPermission,
-	},
-	{
-		Name:                     StopCommand,
-		Description:              "Stop the minecraft server",
 		DefaultMemberPermissions: &adminPermissions,
 		DMPermission:             &dmPermission,
 	},
