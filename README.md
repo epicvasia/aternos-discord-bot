@@ -6,7 +6,7 @@
 ## !! RISK OF BAN !!
 **Use of this bot may lead to bans from Aternos. Use at your own risk.**
 
-> **⚠️ Use this software at your own discretion. Read the [TOS](https://github.com/epicvasia/aternos-discord-bot/blob/main/TOS.md) for more information.**
+> **⚠ Use this software at your own discretion. Read the [TOS](https://github.com/epicvasia/aternos-discord-bot/blob/main/TOS.md) for more information.**
 
 If you're just looking for easy hosting, consider [exaroton](https://exaroton.com/) instead — a premium solution by the Aternos team with an official Discord bot.
 
