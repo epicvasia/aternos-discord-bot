@@ -129,5 +129,5 @@ Licensed under `MIT License`.
 
 ---
 
-Maintained by [TheEpicVasia](https://github.com/epicvasia)  
+Maintained by [epicvasia](https://github.com/epicvasia)  
 Based on work by [sleeyax](https://github.com/sleeyax/aternos-discord-bot)
